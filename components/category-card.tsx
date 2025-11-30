@@ -12,13 +12,17 @@ interface CategoryCardProps {
 export function CategoryCard({ id, name, icon, color, testCount }: CategoryCardProps) {
   return (
     <Link href={`/tests?category=${id}`}>
-      <div className="group flex items-center gap-3 rounded-xl border border-border bg-card p-3 transition-all active:bg-muted">
-        <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${color} text-xl`}>{icon}</div>
-        <div className="min-w-0 flex-1">
-          <h3 className="truncate text-sm font-semibold text-foreground">{name}</h3>
-          <p className="text-xs text-muted-foreground">{testCount} ta test</p>
+      <div className="group flex items-center gap-4 rounded-xl border border-border bg-gradient-to-br from-card to-card/50 p-4 transition-all active:scale-95 hover:border-primary/30">
+        <div
+          className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-lg ${color} text-2xl shadow-md transition-transform group-hover:scale-110`}
+        >
+          {icon}
         </div>
-        <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1" />
+        <div className="min-w-0 flex-1">
+          <h3 className="truncate text-base font-bold text-foreground">{name}</h3>
+          <p className="text-xs text-muted-foreground font-medium">{testCount} ta test</p>
+        </div>
+        <ChevronRight className="h-5 w-5 shrink-0 text-muted-foreground transition-all group-hover:translate-x-1 group-active:translate-x-0" />
       </div>
     </Link>
   )

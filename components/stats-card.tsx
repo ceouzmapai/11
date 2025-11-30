@@ -10,12 +10,16 @@ interface StatsCardProps {
 
 export function StatsCard({ title, value, subtitle, icon, color = "bg-primary" }: StatsCardProps) {
   return (
-    <div className="flex items-center gap-3 rounded-xl border border-border bg-card p-3">
-      <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${color}`}>{icon}</div>
-      <div className="min-w-0">
-        <p className="text-xs text-muted-foreground">{title}</p>
-        <p className="text-xl font-bold text-foreground">{value}</p>
-        {subtitle && <p className="text-xs text-muted-foreground">{subtitle}</p>}
+    <div className={`rounded-xl border border-border bg-gradient-to-br from-card to-card/50 p-4 shadow-sm ${color}`}>
+      <div className="flex items-center gap-4">
+        <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-lg ${color} shadow-md`}>
+          {icon}
+        </div>
+        <div className="min-w-0 flex-1">
+          <p className="text-xs font-medium text-muted-foreground">{title}</p>
+          <p className="text-2xl font-bold text-foreground">{value}</p>
+          {subtitle && <p className="text-xs text-muted-foreground">{subtitle}</p>}
+        </div>
       </div>
     </div>
   )

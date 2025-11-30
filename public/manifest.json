@@ -1,22 +1,78 @@
 {
   "name": "NUrTest - Test Yechish Ilovasi",
   "short_name": "NUrTest",
-  "description": "Bilimingizni sinab ko'ring! Turli fanlar bo'yicha testlarni yeching.",
+  "description": "Bilimingizni sinab ko'ring! Turli fanlar bo'yicha testlarni yeching va natijalaringizni kuzating.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#0a0a0a",
-  "theme_color": "#3b82f6",
-  "orientation": "portrait",
+  "theme_color": "#9333ea",
+  "orientation": "portrait-primary",
   "icons": [
     {
       "src": "/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-1.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/screenshot-2.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "categories": ["education", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Testlarni boshlash",
+      "short_name": "Testlar",
+      "description": "Yangi testni tanlang va yeching",
+      "url": "/tests",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Natijalarni ko'rish",
+      "short_name": "Natijalar",
+      "description": "O'zingizning test natijalaringizni ko'ring",
+      "url": "/results",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ]
 }

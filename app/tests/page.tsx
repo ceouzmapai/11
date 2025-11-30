@@ -2,7 +2,7 @@
 
 import { useState, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
-import { Search, Filter } from "lucide-react"
+import { Search, Filter, Sparkles } from "lucide-react"
 import { Header } from "@/components/header"
 import { BottomNav } from "@/components/bottom-nav"
 import { TestCard } from "@/components/test-card"
@@ -30,26 +30,28 @@ function TestsContent() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-6 pb-nav">
-      <h1 className="mb-4 text-xl font-bold text-foreground">Testlar</h1>
+      <div className="mb-6 flex items-center gap-2">
+        <Sparkles className="h-5 w-5 text-primary" />
+        <h1 className="text-xl font-bold text-foreground">Testlar</h1>
+      </div>
 
-      {/* Search */}
-      <div className="relative mb-4">
-        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+      <div className="relative mb-5">
+        <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
         <Input
           placeholder="Test qidirish..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="h-11 pl-10"
+          className="h-12 pl-10 text-base font-medium"
         />
       </div>
 
-      {/* Category Tabs - horizontal scroll on mobile */}
-      <div className="mb-4 flex gap-2 overflow-x-auto pb-2 hide-scrollbar">
+      {/* Category Tabs - horizontal scroll */}
+      <div className="mb-6 flex gap-2 overflow-x-auto pb-2 hide-scrollbar">
         <button
           onClick={() => setSelectedCategory(null)}
-          className={`touch-target shrink-0 rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+          className={`touch-target shrink-0 rounded-lg px-4 py-2 text-sm font-bold transition-all ${
             !selectedCategory
-              ? "bg-primary text-primary-foreground"
+              ? "gradient-primary text-primary-foreground"
               : "bg-muted text-muted-foreground active:bg-muted/80"
           }`}
         >
@@ -59,30 +61,32 @@ function TestsContent() {
           <button
             key={category.id}
             onClick={() => setSelectedCategory(category.id)}
-            className={`touch-target flex shrink-0 items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+            className={`touch-target flex shrink-0 items-center gap-2 rounded-lg px-4 py-2 text-sm font-bold transition-all ${
               selectedCategory === category.id
-                ? "bg-primary text-primary-foreground"
+                ? "gradient-primary text-primary-foreground"
                 : "bg-muted text-muted-foreground active:bg-muted/80"
             }`}
           >
             <span>{category.icon}</span>
-            <span>{category.name}</span>
+            <span className="hidden xs:inline">{category.name}</span>
           </button>
         ))}
       </div>
 
       {/* Tests Grid */}
       {filteredTests.length > 0 ? (
-        <div className="grid gap-3 sm:grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-2">
           {filteredTests.map((test) => (
             <TestCard key={test.id} test={test} />
           ))}
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center py-16">
-          <Filter className="mb-4 h-12 w-12 text-muted-foreground" />
-          <p className="text-lg font-medium text-foreground">Testlar topilmadi</p>
-          <p className="text-sm text-muted-foreground">Boshqa kategoriyani tanlang</p>
+        <div className="flex flex-col items-center justify-center py-20">
+          <Filter className="mb-4 h-16 w-16 text-muted-foreground/40" />
+          <p className="text-lg font-semibold text-foreground">Testlar topilmadi</p>
+          <p className="text-sm text-muted-foreground">
+            Boshqa kategoriyani tanlang yoki qidirish shartini o'zgartiring
+          </p>
         </div>
       )}
     </main>
@@ -96,12 +100,12 @@ export default function TestsPage() {
       <Suspense
         fallback={
           <main className="mx-auto max-w-5xl px-4 py-6 pb-nav">
-            <div className="animate-pulse">
-              <div className="mb-4 h-7 w-24 rounded bg-muted"></div>
-              <div className="mb-4 h-11 rounded bg-muted"></div>
-              <div className="grid gap-3 sm:grid-cols-2">
+            <div className="animate-pulse space-y-4">
+              <div className="h-8 w-32 rounded bg-muted"></div>
+              <div className="h-12 rounded-lg bg-muted"></div>
+              <div className="grid gap-4 sm:grid-cols-2">
                 {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="h-40 rounded-xl bg-muted"></div>
+                  <div key={i} className="h-48 rounded-xl bg-muted"></div>
                 ))}
               </div>
             </div>

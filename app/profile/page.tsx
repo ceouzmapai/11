@@ -32,72 +32,71 @@ export default function ProfilePage() {
       <Header />
 
       <main className="mx-auto max-w-5xl px-4 py-6 pb-nav">
-        {/* Profile Header */}
-        <div className="mb-6 flex flex-col items-center">
-          <div className="mb-3 flex h-20 w-20 items-center justify-center rounded-full bg-primary">
-            <span className="text-3xl font-bold text-primary-foreground">{totalTests > 0 ? averageScore : "?"}</span>
+        <div className="mb-8 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 border border-primary/20 p-6 text-center">
+          <div className="mb-4 inline-flex h-24 w-24 items-center justify-center rounded-full gradient-primary text-primary-foreground shadow-lg">
+            <span className="text-4xl font-bold">{totalTests > 0 ? averageScore : "?"}</span>
           </div>
-          <h1 className="text-xl font-bold text-foreground">Foydalanuvchi</h1>
-          <p className="text-sm text-muted-foreground">
+          <h1 className="text-2xl font-bold text-foreground">Foydalanuvchi</h1>
+          <p className="mt-2 text-sm text-muted-foreground">
             {totalTests > 0 ? `${totalTests} ta test yechilgan` : "Hali test yechilmagan"}
           </p>
         </div>
 
         {/* Stats Grid */}
-        <div className="mb-6 grid grid-cols-2 gap-3">
-          <div className="rounded-xl border border-border bg-card p-4">
-            <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/20">
-              <Target className="h-5 w-5 text-primary" />
+        <div className="mb-8 grid grid-cols-2 gap-3">
+          <div className="rounded-xl border border-border bg-gradient-to-br from-card to-card/50 p-4 shadow-sm">
+            <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-primary/20">
+              <Target className="h-6 w-6 text-primary" />
             </div>
-            <p className="text-2xl font-bold text-foreground">{totalTests}</p>
-            <p className="text-xs text-muted-foreground">Jami testlar</p>
+            <p className="text-3xl font-bold text-foreground">{totalTests}</p>
+            <p className="text-xs font-medium text-muted-foreground mt-1">Jami testlar</p>
           </div>
-          <div className="rounded-xl border border-border bg-card p-4">
-            <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-accent/20">
-              <Trophy className="h-5 w-5 text-accent" />
+          <div className="rounded-xl border border-border bg-gradient-to-br from-card to-card/50 p-4 shadow-sm">
+            <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-accent/20">
+              <Trophy className="h-6 w-6 text-accent" />
             </div>
-            <p className="text-2xl font-bold text-foreground">{averageScore}%</p>
-            <p className="text-xs text-muted-foreground">O'rtacha ball</p>
+            <p className="text-3xl font-bold text-foreground">{averageScore}%</p>
+            <p className="text-xs font-medium text-muted-foreground mt-1">O'rtacha ball</p>
           </div>
-          <div className="rounded-xl border border-border bg-card p-4">
-            <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/20">
-              <Clock className="h-5 w-5 text-blue-500" />
+          <div className="rounded-xl border border-border bg-gradient-to-br from-card to-card/50 p-4 shadow-sm">
+            <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-primary/20">
+              <Clock className="h-6 w-6 text-primary" />
             </div>
-            <p className="text-2xl font-bold text-foreground">{totalMinutes}</p>
-            <p className="text-xs text-muted-foreground">Daqiqa sarflangan</p>
+            <p className="text-3xl font-bold text-foreground">{totalMinutes}</p>
+            <p className="text-xs font-medium text-muted-foreground mt-1">Daqiqa sarflangan</p>
           </div>
-          <div className="rounded-xl border border-border bg-card p-4">
-            <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/20">
-              <Star className="h-5 w-5 text-amber-500" />
+          <div className="rounded-xl border border-border bg-gradient-to-br from-card to-card/50 p-4 shadow-sm">
+            <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-warning/20">
+              <Star className="h-6 w-6 text-warning" />
             </div>
-            <p className="text-2xl font-bold text-foreground">{bestScore}%</p>
-            <p className="text-xs text-muted-foreground">Eng yaxshi natija</p>
+            <p className="text-3xl font-bold text-foreground">{bestScore}%</p>
+            <p className="text-xs font-medium text-muted-foreground mt-1">Eng yaxshi natija</p>
           </div>
         </div>
 
         {/* Menu Items */}
         <div className="space-y-2">
-          <button className="flex w-full items-center gap-3 rounded-xl border border-border bg-card p-4 text-left transition-colors active:bg-muted">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-muted">
-              <Info className="h-5 w-5 text-muted-foreground" />
+          <button className="flex w-full items-center gap-4 rounded-xl border border-border bg-gradient-to-br from-card to-card/50 p-4 text-left transition-all active:scale-95 hover:border-primary/30">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+              <Info className="h-6 w-6 text-primary" />
             </div>
             <div className="flex-1">
-              <p className="font-medium text-foreground">Ilova haqida</p>
-              <p className="text-xs text-muted-foreground">Versiya 1.0.0</p>
+              <p className="font-bold text-foreground">Ilova haqida</p>
+              <p className="text-xs text-muted-foreground mt-0.5">Versiya 1.0.0 | NUrTest</p>
             </div>
             <ChevronRight className="h-5 w-5 text-muted-foreground" />
           </button>
 
           <button
             onClick={() => setShowClearModal(true)}
-            className="flex w-full items-center gap-3 rounded-xl border border-destructive/30 bg-card p-4 text-left transition-colors active:bg-destructive/10"
+            className="flex w-full items-center gap-4 rounded-xl border-2 border-destructive/30 bg-destructive/5 p-4 text-left transition-all active:scale-95"
           >
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-destructive/20">
-              <Trash2 className="h-5 w-5 text-destructive" />
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-destructive/20">
+              <Trash2 className="h-6 w-6 text-destructive" />
             </div>
             <div className="flex-1">
-              <p className="font-medium text-destructive">Ma'lumotlarni tozalash</p>
-              <p className="text-xs text-muted-foreground">Barcha natijalarni o'chirish</p>
+              <p className="font-bold text-destructive">Ma'lumotlarni tozalash</p>
+              <p className="text-xs text-muted-foreground mt-0.5">Barcha natijalarni o'chirish</p>
             </div>
             <ChevronRight className="h-5 w-5 text-muted-foreground" />
           </button>
@@ -108,17 +107,24 @@ export default function ProfilePage() {
 
       {/* Clear Modal */}
       {showClearModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm p-4">
-          <div className="w-full max-w-sm rounded-xl border border-border bg-card p-5">
-            <h3 className="mb-2 text-lg font-semibold text-foreground">Ma'lumotlarni o'chirish</h3>
-            <p className="mb-4 text-sm text-muted-foreground">
+        <div className="fixed inset-0 z-50 flex items-end justify-center bg-background/60 backdrop-blur-sm p-4 safe-area-bottom">
+          <div className="w-full max-w-sm rounded-t-2xl border border-border bg-card p-6 animate-in slide-in-from-bottom-4 duration-300">
+            <h3 className="mb-2 text-lg font-bold text-foreground">Ma'lumotlarni o'chirish</h3>
+            <p className="mb-6 text-sm text-muted-foreground">
               Barcha test natijalari o'chiriladi. Bu amalni qaytarib bo'lmaydi.
             </p>
             <div className="flex gap-3">
-              <Button variant="outline" onClick={() => setShowClearModal(false)} className="flex-1">
+              <Button
+                variant="outline"
+                onClick={() => setShowClearModal(false)}
+                className="h-12 flex-1 touch-target font-bold"
+              >
                 Bekor qilish
               </Button>
-              <Button variant="destructive" onClick={handleClearResults} className="flex-1">
+              <Button
+                onClick={handleClearResults}
+                className="h-12 flex-1 touch-target bg-destructive text-destructive-foreground font-bold active:opacity-90"
+              >
                 O'chirish
               </Button>
             </div>

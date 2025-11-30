@@ -85,44 +85,44 @@ export function QuizComponent({ test }: QuizComponentProps) {
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-4">
-      {/* Header */}
-      <div className="mb-4 flex items-center justify-between">
-        <div>
-          <h1 className="text-lg font-bold text-foreground">{test.title}</h1>
-          <p className="text-xs text-muted-foreground">
-            {currentQuestion + 1} / {test.questions.length}
+      <div className="mb-4 flex items-center justify-between gap-3">
+        <div className="flex-1 min-w-0">
+          <h1 className="text-lg font-bold text-foreground truncate">{test.title}</h1>
+          <p className="text-xs text-muted-foreground mt-1">
+            Savol {currentQuestion + 1} / {test.questions.length}
           </p>
         </div>
         <div
-          className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 ${
-            isTimeWarning ? "bg-destructive/20 text-destructive" : "bg-muted"
+          className={`flex items-center gap-1.5 rounded-lg px-3 py-2 font-mono font-bold whitespace-nowrap ${
+            isTimeWarning
+              ? "bg-gradient-to-br from-destructive/20 to-destructive/10 text-destructive border border-destructive/30"
+              : "bg-gradient-to-br from-primary/10 to-primary/5 text-primary border border-primary/20"
           }`}
         >
-          <Clock className={`h-4 w-4 ${isTimeWarning ? "animate-pulse" : ""}`} />
-          <span className="font-mono text-base font-bold">{formatTime(timeLeft)}</span>
+          <Clock className={`h-5 w-5 ${isTimeWarning ? "animate-pulse" : ""}`} />
+          <span className="text-sm">{formatTime(timeLeft)}</span>
         </div>
       </div>
 
-      {/* Progress */}
-      <div className="mb-4">
-        <div className="mb-1.5 flex items-center justify-between text-xs">
-          <span className="text-muted-foreground">Jarayon</span>
-          <span className="text-foreground">
+      {/* Progress Bar */}
+      <div className="mb-5">
+        <div className="mb-2 flex items-center justify-between text-xs">
+          <span className="text-muted-foreground font-medium">Jarayon</span>
+          <span className="text-foreground font-semibold">
             {answeredCount} / {test.questions.length}
           </span>
         </div>
-        <Progress value={progress} className="h-2" />
+        <Progress value={progress} className="h-2.5" />
       </div>
 
-      {/* Question Navigation Pills - horizontal scroll */}
-      <div className="mb-4 flex gap-1.5 overflow-x-auto pb-2 hide-scrollbar">
+      <div className="mb-5 flex gap-1 overflow-x-auto pb-2 hide-scrollbar">
         {test.questions.map((_, index) => (
           <button
             key={index}
             onClick={() => goToQuestion(index)}
-            className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-xs font-medium transition-colors ${
+            className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-xs font-bold transition-all touch-target ${
               index === currentQuestion
-                ? "bg-primary text-primary-foreground"
+                ? "gradient-primary text-primary-foreground scale-110 shadow-lg"
                 : selectedAnswers[index] !== null
                   ? "bg-accent text-accent-foreground"
                   : "bg-muted text-muted-foreground active:bg-muted/80"
@@ -134,35 +134,36 @@ export function QuizComponent({ test }: QuizComponentProps) {
       </div>
 
       {/* Question Card */}
-      <div className="mb-4 rounded-xl border border-border bg-card p-4">
-        <h2 className="mb-4 text-base font-medium text-foreground">{question.question}</h2>
+      <div className="mb-5 rounded-xl border border-border bg-card p-5 shadow-sm">
+        <h2 className="mb-5 text-base font-semibold text-foreground leading-relaxed">{question.question}</h2>
 
-        <div className="space-y-2">
-          {question.options.map((option, index) => (
-            <button
-              key={index}
-              onClick={() => handleAnswerSelect(index)}
-              className={`flex w-full touch-target items-center gap-3 rounded-lg border p-3 text-left transition-all ${
-                selectedAnswers[currentQuestion] === index
-                  ? "border-primary bg-primary/10 text-foreground"
-                  : "border-border bg-muted/50 text-foreground active:border-primary/50 active:bg-muted"
-              }`}
-            >
-              <span
-                className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border text-xs font-medium ${
-                  selectedAnswers[currentQuestion] === index
-                    ? "border-primary bg-primary text-primary-foreground"
-                    : "border-border"
+        <div className="space-y-3">
+          {question.options.map((option, index) => {
+            const isSelected = selectedAnswers[currentQuestion] === index
+            return (
+              <button
+                key={index}
+                onClick={() => handleAnswerSelect(index)}
+                className={`flex w-full touch-target items-start gap-3 rounded-lg border-2 p-3.5 text-left transition-all ${
+                  isSelected
+                    ? "border-primary bg-gradient-to-br from-primary/15 to-primary/5 text-foreground"
+                    : "border-border bg-card text-foreground active:border-primary/50 active:bg-primary/5"
                 }`}
               >
-                {String.fromCharCode(65 + index)}
-              </span>
-              <span className="text-sm">{option}</span>
-              {selectedAnswers[currentQuestion] === index && (
-                <Check className="ml-auto h-4 w-4 shrink-0 text-primary" />
-              )}
-            </button>
-          ))}
+                <span
+                  className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 font-bold text-sm transition-all ${
+                    isSelected
+                      ? "border-primary bg-primary text-primary-foreground"
+                      : "border-border bg-muted text-muted-foreground"
+                  }`}
+                >
+                  {String.fromCharCode(65 + index)}
+                </span>
+                <span className="flex-1 pt-0.5 text-sm font-medium leading-relaxed">{option}</span>
+                {isSelected && <Check className="h-5 w-5 shrink-0 text-primary mt-0.5" />}
+              </button>
+            )
+          })}
         </div>
       </div>
 
@@ -172,27 +173,27 @@ export function QuizComponent({ test }: QuizComponentProps) {
           variant="outline"
           onClick={() => setCurrentQuestion((prev) => Math.max(0, prev - 1))}
           disabled={currentQuestion === 0}
-          className="h-11 touch-target gap-1.5"
+          className="h-12 touch-target gap-2 flex-1"
         >
           <ChevronLeft className="h-4 w-4" />
-          Oldingi
+          <span className="hidden xs:inline">Oldingi</span>
         </Button>
 
         {currentQuestion === test.questions.length - 1 ? (
           <Button
             onClick={() => setShowConfirmModal(true)}
             disabled={isSubmitting}
-            className="h-11 touch-target gap-1.5 bg-accent text-accent-foreground active:bg-accent/90"
+            className="h-12 touch-target gap-2 flex-1 gradient-success text-success-foreground active:opacity-90"
           >
-            Yakunlash
             <Check className="h-4 w-4" />
+            <span className="hidden xs:inline">Yakunlash</span>
           </Button>
         ) : (
           <Button
             onClick={() => setCurrentQuestion((prev) => Math.min(test.questions.length - 1, prev + 1))}
-            className="h-11 touch-target gap-1.5"
+            className="h-12 touch-target gap-2 flex-1"
           >
-            Keyingi
+            <span className="hidden xs:inline">Keyingi</span>
             <ChevronRight className="h-4 w-4" />
           </Button>
         )}
@@ -200,32 +201,40 @@ export function QuizComponent({ test }: QuizComponentProps) {
 
       {/* Confirm Modal */}
       {showConfirmModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm p-4">
-          <div className="w-full max-w-sm rounded-xl border border-border bg-card p-5">
-            <div className="mb-3 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-warning/20">
-                <AlertCircle className="h-5 w-5 text-warning" />
+        <div className="fixed inset-0 z-50 flex items-end justify-center bg-background/60 backdrop-blur-sm p-4 safe-area-bottom">
+          <div className="w-full max-w-sm rounded-t-2xl border border-border bg-card p-6 animate-in slide-in-from-bottom-4 duration-300">
+            <div className="mb-4 flex items-center gap-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full gradient-danger text-warning-foreground">
+                <AlertCircle className="h-6 w-6" />
               </div>
-              <h3 className="text-lg font-semibold text-foreground">Testni yakunlash</h3>
+              <h3 className="text-xl font-bold text-foreground">Testni yakunlash</h3>
             </div>
 
-            <p className="mb-2 text-sm text-muted-foreground">
-              {answeredCount} ta savolga javob berildi ({test.questions.length} tadan).
-            </p>
-            {answeredCount < test.questions.length && (
-              <p className="mb-4 text-xs text-warning">{test.questions.length - answeredCount} ta savol javobsiz!</p>
-            )}
+            <div className="mb-6 space-y-2">
+              <p className="text-sm text-muted-foreground">
+                <span className="font-semibold text-foreground">{answeredCount}</span> ta savolga javob berildi
+              </p>
+              {answeredCount < test.questions.length && (
+                <p className="text-sm text-warning font-medium">
+                  {test.questions.length - answeredCount} ta savol javobsiz!
+                </p>
+              )}
+            </div>
 
             <div className="flex gap-3">
-              <Button variant="outline" onClick={() => setShowConfirmModal(false)} className="h-11 flex-1 touch-target">
+              <Button
+                variant="outline"
+                onClick={() => setShowConfirmModal(false)}
+                className="h-12 flex-1 touch-target text-base font-semibold"
+              >
                 Bekor
               </Button>
               <Button
                 onClick={submitTest}
                 disabled={isSubmitting}
-                className="h-11 flex-1 touch-target bg-accent text-accent-foreground active:bg-accent/90"
+                className="h-12 flex-1 touch-target text-base font-semibold gradient-success text-success-foreground active:opacity-90"
               >
-                Yakunlash
+                Tasdiqlash
               </Button>
             </div>
           </div>
